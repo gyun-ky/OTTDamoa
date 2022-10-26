@@ -25,7 +25,7 @@ public class Actor extends BaseAuditingEntity{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "profile_image_url")
+    @Column(name = "profile_image_url", columnDefinition="TEXT")
     private String profileImageUrl;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "actor")

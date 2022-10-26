@@ -22,8 +22,14 @@ public class Member extends BaseAuditingEntity{
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "password")
+    @Column(name = "id")
+    private String userId;
+
+    @Column(name = "password", columnDefinition = "TEXT")
     private String password;
+
+    @Column(name = "refresh_token", columnDefinition = "TEXT")
+    private String refreshToken;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<MemberActor> memberActorList = new ArrayList<>();
@@ -42,4 +48,7 @@ public class Member extends BaseAuditingEntity{
         INACTIVE, ACTIVE
     }
 
+    public void setRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
+    }
 }

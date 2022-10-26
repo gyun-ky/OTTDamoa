@@ -25,11 +25,11 @@ public class Media extends BaseAuditingEntity{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition="TEXT")
     private String imageUrl;
 
-    @Column(name = "director")
-    private String director;
+//    @Column(name = "director")
+//    private String director;
 
     @Column(name = "hit")
     private Long hit;
@@ -44,7 +44,7 @@ public class Media extends BaseAuditingEntity{
     private List<MediaPlatform> mediaPlatformList = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "name")
+    @Column(name = "status")
     private Status status;
 
     public enum Status{
