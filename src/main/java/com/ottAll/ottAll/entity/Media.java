@@ -43,6 +43,9 @@ public class Media extends BaseAuditingEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
     private List<MediaPlatform> mediaPlatformList = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "media")
+    private List<LikeMember> likeMemberList = new ArrayList<>();
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")
     private Status status;

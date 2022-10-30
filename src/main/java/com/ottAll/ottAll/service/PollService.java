@@ -1,28 +1,29 @@
 package com.ottAll.ottAll.service;
 
-import com.ottAll.ottAll.dto.ActorPollDto;
-import com.ottAll.ottAll.dto.GenrePollDto;
-import com.ottAll.ottAll.dto.PlatformPollDto;
-import com.ottAll.ottAll.dto.RetrievePollDto;
-import com.ottAll.ottAll.entity.Actor;
-import com.ottAll.ottAll.entity.Genre;
-import com.ottAll.ottAll.entity.Platform;
-import com.ottAll.ottAll.repository.ActorRepository;
-import com.ottAll.ottAll.repository.GenreRepository;
-import com.ottAll.ottAll.repository.PlatformRepository;
+import com.ottAll.ottAll.dto.*;
+import com.ottAll.ottAll.entity.*;
+import com.ottAll.ottAll.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PollService {
 
+    private final MemberRepository memberRepository;
+
     private final PlatformRepository platformRepository;
     private final GenreRepository genreRepository;
     private final ActorRepository actorRepository;
+
+    private final MemberPlatformRepository memberPlatformRepository;
+    private final MemberGenreRepository memberGenreRepository;
+    private final MemberActorRepository memberActorRepository;
 
     /**
      * 설문조사 선택 항목 조회
@@ -57,4 +58,17 @@ public class PollService {
         return result;
 
     }
+
+//    @Transactional(rollbackFor = Exception.class)
+//    public void createPollResult(String userId, CreatePollResultReq createPollResultReq){
+//
+//        Member member = memberRepository.findByUserIdAndStatus(userId, Member.Status.ACTIVE)
+//                .orElseThrow(() -> new NoSuchElementException("해당 유져가 존재하지 않습니다"));
+//
+//        createPollResultReq.getActorList()
+//                .stream()
+//                .map(a->)
+//    }
+
+//    public void create
 }

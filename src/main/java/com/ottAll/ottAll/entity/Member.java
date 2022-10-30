@@ -40,6 +40,9 @@ public class Member extends BaseAuditingEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<MemberGenre> memberGenreList = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<LikeMember> likeMemberList = new ArrayList<>();
+
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private Status status;
