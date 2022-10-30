@@ -1,5 +1,6 @@
 package com.ottAll.ottAll.entity;
 
+import com.ottAll.ottAll.dto.PlatformPollDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,5 +38,9 @@ public class Platform extends BaseAuditingEntity{
 
     public enum Status{
         INACTIVE, ACTIVE
+    }
+
+    public static PlatformPollDto getPlatformPollDto(Platform platform){
+        return new PlatformPollDto(platform);
     }
 }

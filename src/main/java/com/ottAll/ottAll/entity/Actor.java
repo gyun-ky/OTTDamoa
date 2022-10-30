@@ -1,5 +1,6 @@
 package com.ottAll.ottAll.entity;
 
+import com.ottAll.ottAll.dto.ActorPollDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,5 +41,9 @@ public class Actor extends BaseAuditingEntity{
 
     public enum Status{
         INACTIVE, ACTIVE
+    }
+
+    public static ActorPollDto getActorPollDto(Actor actor){
+        return new ActorPollDto(actor);
     }
 }

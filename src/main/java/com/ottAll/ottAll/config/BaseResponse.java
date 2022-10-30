@@ -53,9 +53,9 @@ public class BaseResponse<T>{
 
     }
 
-    public BaseResponse(HttpStatus badRequest, Exception e) {
+    public BaseResponse(HttpStatus badResponse, Exception e) {
         this.isSuccess = false;
-        this.code = badRequest.value();
+        this.code = badResponse.value();
         this.message = e.getMessage();
         this.result = null;
     }

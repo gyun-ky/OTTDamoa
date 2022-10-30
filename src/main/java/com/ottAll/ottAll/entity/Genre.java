@@ -1,5 +1,7 @@
 package com.ottAll.ottAll.entity;
 
+import com.ottAll.ottAll.dto.GenrePollDto;
+import com.ottAll.ottAll.dto.PlatformPollDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,4 +40,7 @@ public class Genre extends BaseAuditingEntity{
         INACTIVE, ACTIVE
     }
 
+    public static GenrePollDto getGenrePollDto(Genre genre){
+        return new GenrePollDto(genre);
+    }
 }
