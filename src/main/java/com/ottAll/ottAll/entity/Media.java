@@ -57,4 +57,8 @@ public class Media extends BaseAuditingEntity{
         INACTIVE, ACTIVE
     }
 
+    public void addHit(Long hitCount){
+        this.hit += 1;
+    }
+
 }

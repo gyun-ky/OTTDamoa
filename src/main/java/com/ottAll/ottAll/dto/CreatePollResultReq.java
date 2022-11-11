@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,8 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CreatePollResultReq {
 
-    private List<Long> platformList;
-    private List<Long> genreList;
-    private List<Long> actorList;
+    private List<IdEntity> platformList;
+    private List<IdEntity> genreList;
+    private List<IdEntity> actorList;
 
+    private class IdEntity {
+        private Long id;
+    }
 }
