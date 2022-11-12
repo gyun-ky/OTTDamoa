@@ -1,10 +1,9 @@
 package com.ottAll.ottAll;
 
-import com.ottAll.ottAll.dto.SuggestionMediaDao;
+import com.ottAll.ottAll.dao.SuggestionMediaDao;
 import com.ottAll.ottAll.entity.Member;
 import com.ottAll.ottAll.repository.MemberRepository;
 import com.ottAll.ottAll.repository.QMediaRepository;
-import com.ottAll.ottAll.repository.QMediaRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -63,9 +63,13 @@ public class AuthService {
      * @param password 회원 비밀번호
      */
     @Transactional(rollbackFor = Exception.class)
-    public void signUp(String userId, String password){
+    public void signUp(String userId, String password) throws Exception{
 
         try {
+            if(memberRepository.existsByUserIdAndStatus(userId, Member.Status.ACTIVE)){
+                throw new Exception("중복된 아이디입니다.");
+            }
+
             memberRepository.save(Member.builder()
                     .userId(userId)
                     .password(passwordEncoder.encode(password))

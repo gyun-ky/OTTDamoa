@@ -35,4 +35,10 @@ public class MemberPlatform extends BaseAuditingEntity{
     public enum Status{
         INACTIVE, ACTIVE
     }
+
+    public MemberPlatform(Member member, Platform platform){
+        this.member = member;
+        this.platform = platform;
+        this.status = Status.ACTIVE;
+    }
 }

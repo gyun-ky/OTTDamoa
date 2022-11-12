@@ -36,4 +36,9 @@ public class MemberGenre extends BaseAuditingEntity{
         INACTIVE, ACTIVE
     }
 
+    public MemberGenre(Member member, Genre genre){
+        this.member = member;
+        this.genre = genre;
+        this.status = Status.ACTIVE;
+    }
 }

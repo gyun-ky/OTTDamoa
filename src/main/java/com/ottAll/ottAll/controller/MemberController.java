@@ -1,6 +1,7 @@
 package com.ottAll.ottAll.controller;
 
 import com.ottAll.ottAll.config.BaseResponse;
+import com.ottAll.ottAll.dao.LikeMediaDao;
 import com.ottAll.ottAll.dto.*;
 import com.ottAll.ottAll.service.MemberService;
 import com.ottAll.ottAll.service.PollService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -51,16 +53,19 @@ public class MemberController {
      * POST 성향조사 항목 등록
      * @return
      */
-//    @ResponseBody
-//    @PostMapping("/poll")
-//    public ResponseEntity<BaseResponse> createPollResult(HttpServletRequest request, @RequestBody CreatePollResultReq createPollResultReq){
-//
-//        try{
-//            pollService.
-//        } catch (Exception e){
-//
-//        }
-//    }
+    @ResponseBody
+    @PostMapping("/poll")
+    public ResponseEntity<BaseResponse> createPollResult(HttpServletRequest request, @RequestBody CreatePollResultReq createPollResultReq){
+
+        try{
+            String userId = (String) request.getAttribute("userId");
+            pollService.createPollResult(userId, createPollResultReq);
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.OK), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST, e), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     /**
      * POST 미디어 좋아요 등록
@@ -101,5 +106,21 @@ public class MemberController {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST, e), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @ResponseBody
+    @GetMapping ("/like")
+    public ResponseEntity<BaseResponse> retrieveLikeList(HttpServletRequest request){
+
+        try{
+            String userId = (String) request.getAttribute("userId");
+            List<LikeMediaDao> result = memberService.retrieveLikeList(userId);
+            return new ResponseEntity<>(new BaseResponse(result), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST, e), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
 }

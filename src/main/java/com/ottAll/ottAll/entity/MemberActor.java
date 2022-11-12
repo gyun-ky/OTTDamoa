@@ -36,4 +36,10 @@ public class MemberActor extends BaseAuditingEntity{
         INACTIVE, ACTIVE
     }
 
+    public MemberActor(Member member, Actor actor){
+        this.member = member;
+        this.actor = actor;
+        this.status = Status.ACTIVE;
+    }
+
 }

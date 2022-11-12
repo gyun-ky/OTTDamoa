@@ -14,11 +14,25 @@ import java.util.List;
 @AllArgsConstructor
 public class CreatePollResultReq {
 
-    private List<IdEntity> platformList;
-    private List<IdEntity> genreList;
-    private List<IdEntity> actorList;
+    private List<platformIdInst> platformList;
+    private List<genreIdInst> genreList;
+    private List<actorIdInst> actorList;
 
-    private class IdEntity {
-        private Long id;
+    @Getter
+    @Setter
+    public static class platformIdInst {
+        private Long platformId;
+    }
+
+    @Getter
+    @Setter
+    public static class genreIdInst {
+        private Long genreId;
+    }
+
+    @Getter
+    @Setter
+    public static class actorIdInst {
+        private Long actorId;
     }
 }

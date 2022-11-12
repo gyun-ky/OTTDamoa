@@ -11,4 +11,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByUserIdAndStatus(String userId, Member.Status status);
     Optional<Member> findByUserIdAndRefreshTokenAndStatus(String userId, String refreshToken, Member.Status status);
+    boolean existsByUserIdAndStatus(String userId, Member.Status status);
 }

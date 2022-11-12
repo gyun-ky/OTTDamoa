@@ -1,5 +1,6 @@
 package com.ottAll.ottAll.dto;
 
+import com.ottAll.ottAll.dao.SuggestionMediaDao;
 import lombok.*;
 
 import java.util.ArrayList;

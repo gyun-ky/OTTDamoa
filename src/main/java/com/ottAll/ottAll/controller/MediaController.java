@@ -3,6 +3,7 @@ package com.ottAll.ottAll.controller;
 import com.ottAll.ottAll.config.BaseResponse;
 import com.ottAll.ottAll.dao.MediaDetailDao;
 import com.ottAll.ottAll.dto.SuggestionMediaDto;
+import com.ottAll.ottAll.dto.TrendItemDto;
 import com.ottAll.ottAll.service.MediaService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,11 @@ public class MediaController {
         }
     }
 
+    /**
+     * GET 추천 미디어 리스트 조회
+     * @param request
+     * @return
+     */
     @ResponseBody
     @GetMapping("/recommand")
     public ResponseEntity<BaseResponse> retrieveSuggestionMediaList(HttpServletRequest request){
@@ -51,4 +57,22 @@ public class MediaController {
             return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST, e), HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * GET 트렌드 추천 조회
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/trend")
+    public ResponseEntity<BaseResponse> retrieveTrendMediaList(){
+        try{
+            List<TrendItemDto> trendItemDtoList = mediaService.retrieveMediaTrend();
+            return new ResponseEntity<>(new BaseResponse(trendItemDtoList), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new BaseResponse(HttpStatus.BAD_REQUEST, e), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

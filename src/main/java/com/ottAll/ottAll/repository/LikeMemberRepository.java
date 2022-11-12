@@ -13,4 +13,5 @@ public interface LikeMemberRepository extends JpaRepository<LikeMember, Long> {
 
     boolean existsByMemberAndMediaAndStatus(Member member, Media media, LikeMember.Status status);
     Optional<LikeMember> findByMemberAndMediaAndStatus(Member member, Media media, LikeMember.Status status);
+
 }

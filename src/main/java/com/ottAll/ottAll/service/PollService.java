@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -59,16 +60,52 @@ public class PollService {
 
     }
 
-//    @Transactional(rollbackFor = Exception.class)
-//    public void createPollResult(String userId, CreatePollResultReq createPollResultReq){
-//
-//        Member member = memberRepository.findByUserIdAndStatus(userId, Member.Status.ACTIVE)
-//                .orElseThrow(() -> new NoSuchElementException("해당 유져가 존재하지 않습니다"));
-//
-//        createPollResultReq.getActorList()
-//                .stream()
-//                .map(a->)
-//    }
+    @Transactional(rollbackFor = Exception.class)
+    public void createPollResult(String userId, CreatePollResultReq req){
 
-//    public void create
+        Member member = memberRepository.findByUserIdAndStatus(userId, Member.Status.ACTIVE)
+                .orElseThrow(() -> new NoSuchElementException("해당 유져가 존재하지 않습니다"));
+
+        List<CreatePollResultReq.platformIdInst> platformList = req.getPlatformList();
+        List<MemberPlatform> memberPlatformList = new ArrayList<>();
+
+        for(CreatePollResultReq.platformIdInst idEntity : platformList){
+            Platform platform = platformRepository.findById(idEntity.getPlatformId())
+                    .orElseThrow(() -> new NoSuchElementException("플랫폼 " + idEntity.getPlatformId() + "가 존재하지 않습니다."));
+            memberPlatformList.add(new MemberPlatform(member, platform));
+        }
+
+        if(!memberPlatformList.isEmpty()){
+            memberPlatformRepository.saveAll(memberPlatformList);
+        }
+
+        // 장르 선호 사항 저장
+        List<CreatePollResultReq.genreIdInst> genreList = req.getGenreList();
+        List<MemberGenre> memberGenreList = new ArrayList<>();
+
+        for(CreatePollResultReq.genreIdInst idEntity : genreList){
+            Genre genre = genreRepository.findById(idEntity.getGenreId())
+                    .orElseThrow(() -> new NoSuchElementException("장르 " + idEntity.getGenreId() + "가 존재하지 않습니다."));
+            memberGenreList.add(new MemberGenre(member, genre));
+        }
+
+        if(!memberGenreList.isEmpty()){
+            memberGenreRepository.saveAll(memberGenreList);
+        }
+
+        // 배우 선호 사항 저장
+        List<CreatePollResultReq.actorIdInst> actorList = req.getActorList();
+        List<MemberActor> memberActorList = new ArrayList<>();
+
+        for(CreatePollResultReq.actorIdInst idEntity : actorList){
+            Actor actor = actorRepository.findById(idEntity.getActorId())
+                    .orElseThrow(() -> new NoSuchElementException("배우 " + idEntity.getActorId() + "가 존재하지 않습니다."));
+            memberActorList.add(new MemberActor(member, actor));
+        }
+
+        if(!memberActorList.isEmpty()){
+            memberActorRepository.saveAll(memberActorList);
+        }
+    }
+
 }

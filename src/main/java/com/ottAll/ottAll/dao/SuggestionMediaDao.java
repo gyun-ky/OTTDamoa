@@ -1,4 +1,4 @@
-package com.ottAll.ottAll.dto;
+package com.ottAll.ottAll.dao;
 
 import lombok.*;
 

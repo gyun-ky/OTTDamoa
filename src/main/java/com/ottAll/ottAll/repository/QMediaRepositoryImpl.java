@@ -1,11 +1,11 @@
 package com.ottAll.ottAll.repository;
 
 import com.ottAll.ottAll.dao.MediaDetailDao;
-import com.ottAll.ottAll.dto.SuggestionMediaDao;
+import com.ottAll.ottAll.dao.TrendItemDao;
+import com.ottAll.ottAll.dao.SuggestionMediaDao;
 import com.ottAll.ottAll.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -103,6 +103,23 @@ public class QMediaRepositoryImpl implements QMediaRepository {
                 .innerJoin(qPlatform.memberPlatformList, qMemberPlatform)
                 .where(qMemberPlatform.member.eq(member).and(qMemberGenre.member.eq(member)))
                 .orderBy(qMedia.hit.desc())
+                .fetch();
+    }
+
+    public List<TrendItemDao> findMediaTrend(){
+        QMedia qMedia = QMedia.media;
+        QMediaPlatform qMediaPlatform = QMediaPlatform.mediaPlatform;
+        QPlatform qPlatform = QPlatform.platform;
+
+        return jpaQueryFactory.select(
+                Projections.bean(TrendItemDao.class,
+                        qMedia.id.as("mediaId"),
+                        qMedia.name.as("name"),
+                        qMedia.hit.as("hit")
+                ))
+                .from(qMedia)
+                .orderBy(qMedia.hit.desc())
+                .limit(5)
                 .fetch();
     }
 }
