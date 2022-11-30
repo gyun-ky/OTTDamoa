@@ -36,10 +36,13 @@ dependencies {
 
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.7.5'
+
+
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
-	implementation ("org.springframework.boot:spring-boot-starter-actuator") //server health check
 }
 
 tasks.named('test') {

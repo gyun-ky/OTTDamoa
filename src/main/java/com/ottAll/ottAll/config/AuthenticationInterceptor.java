@@ -27,6 +27,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         String accessToken = jwtUtil.getJwt();
 
+        if(request.getMethod().equals("OPTIONS")){
+            return true;
+        }
 //        String requestURI= request.getRequestURI();
 
         //jwt가 유효한 경우
